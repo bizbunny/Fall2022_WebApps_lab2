@@ -7,7 +7,7 @@ export default function CreateTodo ({user}){
                 <input type="text" name="create-title" id="create-title" />
             </div>
             <textarea />
-            <input type="submit" value="Crate" />
+            <input type="submit" value="Create" />
         </form>
     )
 }
