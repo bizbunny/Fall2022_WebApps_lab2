@@ -1,11 +1,13 @@
-import Login from "./components/Login";
 import "./styles/App.css";
+import UserBar from "./components/UserBar";
+import Todolist from "./components/Todolist";
 function App() {
   return (
     <div className="App">
       <header className="App-header">
       </header>
-      <Login />
+      <UserBar />
+      <Todolist />
     </div>
   );
 }
