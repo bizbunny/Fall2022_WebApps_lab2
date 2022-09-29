@@ -1,6 +1,6 @@
 export default function Todo({
   title,
-  description,
+  content,
   author,
   dateCreated,
   complete,
@@ -9,12 +9,15 @@ export default function Todo({
   return (
     <div>
       <h1>{title}</h1>
-      <div>{description}</div>
+      <div>{content}</div>
       <br />
       <i>
-        Written by<b>{author}</b>
+        Written by <b>{author}</b>
       </i>
-      <i>Date {dateCreated}</i>
+      <br />
+      <i>Date completed: {dateCreated}</i>
+      <br />
+      <i>Completed: {complete}</i>
     </div>
   );
 }

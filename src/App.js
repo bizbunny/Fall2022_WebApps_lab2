@@ -10,11 +10,13 @@ function App() {
       title: "first post",
       content: "content 1",
       author: "1",
+      complete: "true",
     },
     {
       title: "second post",
       content: "content 2",
       author: "2",
+      complete: "false",
     },
   ];
   const [todo, setTodo] = useState(initialPosts);
@@ -22,7 +24,7 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <UserBar user={user} setUser={setUser} />
-      <Todolist todo={todo} />
+      <Todolist todo={todo} setTodo={setTodo} />
       {user && <CreateTodo user={user} todo={todo} setTodo={setTodo} />}
     </div>
   );

@@ -6,7 +6,7 @@ export default function Logout({ user, setUser }) {
         setUser("");
       }}
     >
-      Logged in as: <b>{user}</b>
+      Logged in as: <b>{user} </b>
       <input type="submit" value="Logout" />
     </form>
   );
