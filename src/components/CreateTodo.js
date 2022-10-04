@@ -21,7 +21,7 @@ export default function CreateTodo({ user, todo, dispatch }) {
           title: title,
           content: content,
           author: user,
-          completed: checked.toString(),
+          complete: checked.toString(),
           id: uuidv4(),
         });
       }}
