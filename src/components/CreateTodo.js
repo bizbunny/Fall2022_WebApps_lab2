@@ -8,6 +8,7 @@ export default function CreateTodo({ user, todo, dispatch }) {
   const [content, setContent] = useState("");
   const [dateCreated, setDateCreated] = useState(Date());
   const [checked, setChecked] = useState(false);
+  const [dateCompleted, setdateCompleted] = useState(Date());
 
   function handleChecked() {
     setChecked(!checked);
@@ -23,6 +24,7 @@ export default function CreateTodo({ user, todo, dispatch }) {
           author: user,
           complete: checked.toString(),
           dateCreated: dateCreated.toString(),
+          dateCompleted: checked ? dateCompleted.toString() : "",
           id: uuidv4(),
         });
       }}

@@ -15,9 +15,11 @@ export default function Todo({
         Written by <b>{author}</b>
       </i>
       <br />
-      <i>Date completed: {dateCreated}</i>
+      <i>Date Created: {dateCreated}</i>
       <br />
       <i>Completed: {complete}</i>
+      <br />
+      <i>Date of Task Completed: {dateCompleted}</i>
     </div>
   );
 }
