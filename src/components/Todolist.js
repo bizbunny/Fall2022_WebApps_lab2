@@ -1,9 +1,9 @@
 import Todo from "./Todo";
-export default function Todolist({ todo = [] }) {
+export default function Todolist({ todos = [] }) {
   return (
     <div>
-      {todo.map((t, i) => (
-        <Todo {...t} key={"todo-" + i} />
+      {todos.map((t, i) => (
+        <Todo {...t} key={t.id} />
       ))}
     </div>
   );
