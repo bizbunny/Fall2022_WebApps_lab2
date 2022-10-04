@@ -20,9 +20,8 @@ export default function CreateTodo({ user, todo, dispatch }) {
           type: "CREATE_TODO",
           title: title,
           content: content,
-          dateCreated,
           author: user,
-          complated: checked.toString(),
+          completed: checked.toString(),
           id: uuidv4(),
         });
       }}

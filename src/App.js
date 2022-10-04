@@ -35,12 +35,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <UserBar user={state.user} dispatch={dispatch} />
-      <Todolist todo={state.todo} />
-      {state.user && (
-        <CreateTodo user={state.user} todo={state.todo} dispatch={dispatch} />
-      )}
+      <header className="App-header">
+        <UserBar user={state.user} dispatch={dispatch} />
+        <Todolist todo={state.todo} />
+        {state.user && (
+          <CreateTodo user={state.user} todo={state.todo} dispatch={dispatch} />
+        )}
+      </header>
     </div>
   );
 }

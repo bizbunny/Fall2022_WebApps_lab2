@@ -1,8 +1,8 @@
 import Todo from "./Todo";
-export default function Todolist({ todos = [] }) {
+export default function Todolist({ todo = [] }) {
   return (
     <div>
-      {todos.map((t, i) => (
+      {todo.map((t, i) => (
         <Todo {...t} key={t.id} />
       ))}
     </div>
