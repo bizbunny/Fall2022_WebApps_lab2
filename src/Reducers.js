@@ -17,6 +17,7 @@ function todoReducer(state, action) {
         content: action.content,
         author: action.author,
         complete: action.complete,
+        dateCreated: action.dateCreated,
         id: action.id,
       };
       return [newTodo, ...state];

@@ -16,6 +16,7 @@ function App() {
       content: "content 1",
       author: "1",
       complete: "true",
+      dateCreated: "Mon Oct 03 2022",
       id: uuidv4(),
     },
     {
@@ -23,6 +24,7 @@ function App() {
       content: "content 2",
       author: "2",
       complete: "false",
+      dateCreated: "Sun Oct 02 2022",
       id: uuidv4(),
     },
   ];
