@@ -37,11 +37,15 @@ function App() {
     todo: initialTodos,
   });
 
+  function handleRemove(id) {
+    dispatch({ type: "DELETE_TODO", id });
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <UserBar user={state.user} dispatch={dispatch} />
-        <Todolist todo={state.todo} />
+        <Todolist todo={state.todo} onRemove={handleRemove} />
         {state.user && (
           <CreateTodo user={state.user} todo={state.todo} dispatch={dispatch} />
         )}

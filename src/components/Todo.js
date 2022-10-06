@@ -5,6 +5,8 @@ export default function Todo({
   dateCreated,
   complete,
   dateCompleted,
+  onRemove,
+  t,
 }) {
   return (
     <div>
@@ -20,6 +22,10 @@ export default function Todo({
       <i>Completed: {complete}</i>
       <br />
       <i>Date of Task Completed: {dateCompleted}</i>
+      <br />
+      <button type="button" onClick={() => onRemove(t.id)}>
+        DELETE
+      </button>
     </div>
   );
 }
