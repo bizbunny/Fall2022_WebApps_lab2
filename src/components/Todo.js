@@ -23,6 +23,7 @@ export default function Todo({
       <br />
       <i>Date of Task Completed: {dateCompleted}</i>
       <br />
+      Completed: <input type="checkbox" />
       <button type="button" onClick={() => onRemove(t.id)}>
         DELETE
       </button>
