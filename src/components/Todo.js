@@ -6,11 +6,11 @@ export default function Todo({
   author,
   dateCreated,
   complete,
-  dateCompleted,
   onRemove,
   onComplete,
   t,
 }) {
+  const [dateCompleted] = useState(Date());
   return (
     <div>
       <h1>{title}</h1>
@@ -24,7 +24,9 @@ export default function Todo({
       <br />
       <i>Completed: {t.complete.toString()}</i>
       <br />
-      <i>Date of Task Completed: {dateCompleted}</i>
+      <i>
+        Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"}
+      </i>
       <br />
       Completed: <input type="checkbox" onChange={() => onComplete(t.id)} />
       <button type="button" onClick={() => onRemove(t.id)}>

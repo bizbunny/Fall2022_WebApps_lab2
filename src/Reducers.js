@@ -25,7 +25,11 @@ function todoReducer(state, action) {
     case "TOGGLE_TODO":
       return state.map((todo) => {
         if (todo.id === action.id) {
-          return { ...todo, complete: !todo.complete };
+          return {
+            ...todo,
+            complete: !todo.complete,
+            dateCompleted: action.dateCompleted,
+          };
         } //if checkbox is modified give a new state
         else {
           return todo;

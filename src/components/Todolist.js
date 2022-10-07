@@ -1,5 +1,10 @@
 import Todo from "./Todo";
-export default function Todolist({ todo = [], onRemove, onComplete }) {
+export default function Todolist({
+  todo = [],
+  onRemove,
+  onComplete,
+  onDateComplete,
+}) {
   return (
     <div>
       {todo.map((t, i) => (

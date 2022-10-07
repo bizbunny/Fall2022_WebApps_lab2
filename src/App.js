@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import UserBar from "./components/UserBar";
 import Todolist from "./components/Todolist";
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 import CreateTodo from "./components/CreateTodo";
 import appReducer from "./Reducers";
 
@@ -16,8 +16,8 @@ function App() {
       content: "content 1",
       author: "1",
       complete: false,
-      dateCompleted: "Tues Oct 04 2022",
-      dateCreated: "Mon Oct 03 2022",
+      dateCompleted: "",
+      dateCreated: "Tues Oct 04 2022",
       id: uuidv4(),
     },
     {

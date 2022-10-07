@@ -6,13 +6,13 @@ export default function CreateTodo({ user, todo, dispatch }) {
   //setUser to dispatch * * *
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [dateCreated, setDateCreated] = useState(Date());
-  const [checked, setChecked] = useState(false); //to move
-  const [dateCompleted, setdateCompleted] = useState(Date()); //to move
+  const [dateCreated] = useState(Date());
+  const [checked] = useState(false); //to move
+  const [dateCompleted] = useState(Date()); //to move
 
-  function handleChecked() {
-    setChecked(!checked);
-  }
+  // function handleChecked() {
+  //   setChecked(!checked);
+  // }
   return (
     <form
       onSubmit={(e) => {
