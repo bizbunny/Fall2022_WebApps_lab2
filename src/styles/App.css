@@ -3,8 +3,8 @@ body {
   font-family: "Lato", sans-serif;
   font-size: large;
 }
-button {
-  background-color: rgba(255, 214, 242, 0.867);
+.button-look {
+  background-color: rgba(171, 226, 168, 0.867);
   border: none;
   padding: 10px;
   margin-left: 10px;

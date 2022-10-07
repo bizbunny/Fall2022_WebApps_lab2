@@ -29,7 +29,11 @@ export default function Todo({
       </i>
       <br />
       Completed: <input type="checkbox" onChange={() => onComplete(t.id)} />
-      <button type="button" onClick={() => onRemove(t.id)}>
+      <button
+        type="button"
+        className="button-look"
+        onClick={() => onRemove(t.id)}
+      >
         DELETE
       </button>
     </div>

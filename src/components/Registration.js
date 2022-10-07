@@ -47,6 +47,7 @@ export default function Registration({ dispatch }) {
       <input
         type="submit"
         value="Register"
+        className="button-look"
         disabled={
           username.length === 0 ||
           password.length === 0 ||
