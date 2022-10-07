@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function Todo({
   title,
   content,
@@ -6,6 +8,7 @@ export default function Todo({
   complete,
   dateCompleted,
   onRemove,
+  onComplete,
   t,
 }) {
   return (
@@ -19,11 +22,11 @@ export default function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      <i>Completed: {complete}</i>
+      <i>Completed: {t.complete.toString()}</i>
       <br />
       <i>Date of Task Completed: {dateCompleted}</i>
       <br />
-      Completed: <input type="checkbox" />
+      Completed: <input type="checkbox" onChange={() => onComplete(t.id)} />
       <button type="button" onClick={() => onRemove(t.id)}>
         DELETE
       </button>

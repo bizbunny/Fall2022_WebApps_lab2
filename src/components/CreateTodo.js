@@ -7,8 +7,8 @@ export default function CreateTodo({ user, todo, dispatch }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dateCreated, setDateCreated] = useState(Date());
-  const [checked, setChecked] = useState(false);
-  const [dateCompleted, setdateCompleted] = useState(Date());
+  const [checked, setChecked] = useState(false); //to move
+  const [dateCompleted, setdateCompleted] = useState(Date()); //to move
 
   function handleChecked() {
     setChecked(!checked);
@@ -22,7 +22,7 @@ export default function CreateTodo({ user, todo, dispatch }) {
           title: title,
           content: content,
           author: user,
-          complete: checked.toString(),
+          complete: checked,
           dateCreated: dateCreated.toString(),
           dateCompleted: checked ? dateCompleted.toString() : "",
           id: uuidv4(),
@@ -48,8 +48,9 @@ export default function CreateTodo({ user, todo, dispatch }) {
         onChange={(event) => setContent(event.target.value)}
       />
       <div>
-        <label htmlFor="complete">Completed: </label>
-        <input type="checkbox" checked={checked} onChange={handleChecked} />
+        {/*<label htmlFor="complete">Completed: </label>
+        <input type="checkbox" checked={checked} onChange={handleChecked} />*/}
+        {/*to move*/}
         <input type="submit" value="Create" />
       </div>
     </form>

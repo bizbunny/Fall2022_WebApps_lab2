@@ -15,7 +15,7 @@ function App() {
       title: "first todo",
       content: "content 1",
       author: "1",
-      complete: "true",
+      complete: false,
       dateCompleted: "Tues Oct 04 2022",
       dateCreated: "Mon Oct 03 2022",
       id: uuidv4(),
@@ -24,7 +24,7 @@ function App() {
       title: "second todo",
       content: "content 2",
       author: "2",
-      complete: "false",
+      complete: false,
       dateCompleted: "",
       dateCreated: "Sun Oct 02 2022",
       id: uuidv4(),
@@ -41,11 +41,19 @@ function App() {
     dispatch({ type: "DELETE_TODO", id });
   }
 
+  function handleComplete(id) {
+    dispatch({ type: "TOGGLE_TODO", id });
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <UserBar user={state.user} dispatch={dispatch} />
-        <Todolist todo={state.todo} onRemove={handleRemove} />
+        <Todolist
+          todo={state.todo}
+          onRemove={handleRemove}
+          onComplete={handleComplete}
+        />
         {state.user && (
           <CreateTodo user={state.user} todo={state.todo} dispatch={dispatch} />
         )}

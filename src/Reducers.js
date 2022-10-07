@@ -23,7 +23,14 @@ function todoReducer(state, action) {
       };
       return [newTodo, ...state];
     case "TOGGLE_TODO":
-      return "";
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: !todo.complete };
+        } //if checkbox is modified give a new state
+        else {
+          return todo;
+        } //else
+      });
     case "DELETE_TODO":
       return state.filter((todo) => todo.id !== action.id);
     default:
