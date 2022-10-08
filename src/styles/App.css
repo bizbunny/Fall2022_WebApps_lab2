@@ -10,3 +10,19 @@ body {
   margin-left: 10px;
   border-radius: 5px;
 }
+.align-content {
+  margin-left: 33%;
+  margin-right: 33%;
+}
+@media screen and (max-width: 600px) {
+  .align-content {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+@media screen and (max-width: 412px) {
+  .align-content {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}

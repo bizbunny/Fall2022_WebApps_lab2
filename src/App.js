@@ -49,11 +49,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <UserBar user={state.user} dispatch={dispatch} />
-        <Todolist
-          todo={state.todo}
-          onRemove={handleRemove}
-          onComplete={handleComplete}
-        />
+        <div class="align-content">
+          <Todolist
+            todo={state.todo}
+            onRemove={handleRemove}
+            onComplete={handleComplete}
+          />
+        </div>
         {state.user && (
           <CreateTodo user={state.user} todo={state.todo} dispatch={dispatch} />
         )}
