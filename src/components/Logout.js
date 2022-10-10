@@ -1,3 +1,4 @@
+import "../styles/App.css";
 export default function Logout({ user, dispatch }) {
   //setUser to dispatch * * *
   return (
@@ -7,8 +8,10 @@ export default function Logout({ user, dispatch }) {
         dispatch({ type: "LOGOUT" });
       }}
     >
-      Logged in as: <b>{user} </b>
-      <input type="submit" className="button-look" value="Logout" />
+      <div class="align-content">
+        Logged in as: <b>{user} </b>
+        <input type="submit" className="button-look" value="Logout" />
+      </div>
     </form>
   );
 }

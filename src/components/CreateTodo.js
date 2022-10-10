@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "../styles/App.css";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CreateTodo({ user, todo, dispatch }) {
@@ -29,29 +29,31 @@ export default function CreateTodo({ user, todo, dispatch }) {
         });
       }}
     >
-      <br />
-      <div>
-        Author: <b>{user}</b>
-      </div>
-      <div>
-        <label htmlFor="create-title">Title: </label>
-        <input
-          type="text"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          name="create-title"
-          id="create-title"
+      <div class="align-content">
+        <br />
+        <div>
+          Author: <b>{user}</b>
+        </div>
+        <div>
+          <label htmlFor="create-title">Title: </label>
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            name="create-title"
+            id="create-title"
+          />
+        </div>
+        <textarea
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
         />
-      </div>
-      <textarea
-        value={content}
-        onChange={(event) => setContent(event.target.value)}
-      />
-      <div>
-        {/*<label htmlFor="complete">Completed: </label>
+        <div>
+          {/*<label htmlFor="complete">Completed: </label>
         <input type="checkbox" checked={checked} onChange={handleChecked} />*/}
-        {/*to move*/}
-        <input type="submit" value="Create" />
+          {/*to move*/}
+          <input type="submit" value="CREATE" class="button-look" />
+        </div>
       </div>
     </form>
   );
