@@ -1,12 +1,16 @@
 import "./styles/App.css";
 import UserBar from "./components/UserBar";
 import Todolist from "./components/Todolist";
-import { useReducer } from "react";
+import { useState, useEffect, useReducer } from "react";
 import CreateTodo from "./components/CreateTodo";
 import appReducer from "./Reducers";
 
+import Header from "./Header";
+
 import { v4 as uuidv4 } from "uuid";
 
+import { ThemeContext, StateContext } from "./context";
+import ChangeTheme from "./Themes/ChangeTheme";
 function App() {
   //setUser to dispatch * * *
   //const [user, setUser] = useState("");
@@ -30,11 +34,25 @@ function App() {
       id: uuidv4(),
     },
   ];
-  //const [todo, setTodo] = useState(initialTodos);
 
   const [state, dispatch] = useReducer(appReducer, {
     user: "",
     todo: initialTodos,
+  });
+
+  const { user } = state;
+
+  useEffect(() => {
+    if (user) {
+      document.title = `${user}’s To Do List`;
+    } else {
+      document.title = "To Do";
+    }
+  }, [user]);
+
+  const [theme, setTheme] = useState({
+    primaryColor: "deepskyblue",
+    secondaryColor: "coral",
   });
 
   function handleRemove(id) {
@@ -47,19 +65,17 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <UserBar user={state.user} dispatch={dispatch} />
-        <div class="align-content">
-          <Todolist
-            todo={state.todo}
-            onRemove={handleRemove}
-            onComplete={handleComplete}
-          />
-        </div>
-        {state.user && (
-          <CreateTodo user={state.user} todo={state.todo} dispatch={dispatch} />
-        )}
-      </header>
+      <StateContext.Provider value={{ state, dispatch }}>
+        <ThemeContext.Provider value={theme}>
+          <Header title="My To Do" />
+          <ChangeTheme theme={theme} setTheme={setTheme} />
+          <UserBar />
+          <div class="align-content">
+            <Todolist />
+          </div>
+          {state.user && <CreateTodo />}
+        </ThemeContext.Provider>
+      </StateContext.Provider>
     </div>
   );
 }
