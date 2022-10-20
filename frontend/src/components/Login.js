@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-export default function Login({ dispatch }) {
+import React, { useState, useContext, useEffect } from "react";
+import { StateContext } from "../context";
+export default function Login() {
   //setUser to dispatch * * *
   const [username, setUsername] = useState("");
+  const [loginFailed, setLoginFailed] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const { dispatch } = useContext(StateContext);
+  function handlePassword(evt) {
+    setPassword(evt.target.value);
+  }
   //   function handleUsername(evt) {
   //     setUsername(evt.target.value);
   //   }
+
   return (
     <form
       onSubmit={(e) => {

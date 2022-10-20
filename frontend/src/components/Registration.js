@@ -1,9 +1,12 @@
-import { useState } from "react";
-export default function Registration({ dispatch }) {
+import { useState, useContext, useEffect } from "react";
+import { StateContext } from "../context";
+
+export default function Registration() {
   //setUser to dispatch * * *
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
+  const { dispatch } = useContext(StateContext);
   //   function handleUsername(evt) {
   //     setUsername(evt.target.value);
   //   }

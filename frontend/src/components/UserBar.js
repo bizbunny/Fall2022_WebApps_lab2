@@ -1,18 +1,20 @@
-import Login from "./Login";
-import Logout from "./Logout";
+import React, { useContext } from "react";
+import { StateContext } from "../context";
 import Register from "./Registration";
-//import { useState } from "react";
-export default function UserBar({ user, dispatch }) {
+import Login from "./Login";
+//import Logout from "./Logout";
+const Logout = React.lazy(() => import("./Logout"));
+export default function UserBar() {
   //setUser to dispatch * * *
   //const [user, setUser] = useState('')
-
-  if (user) {
-    return <Logout user={user} dispatch={dispatch} />;
+  const { state } = useContext(StateContext);
+  if (state.user) {
+    return <Logout />;
   } else {
     return (
       <>
-        <Login dispatch={dispatch} />
-        <Register dispatch={dispatch} />
+        <Login />
+        <Register />
       </>
     );
   }

@@ -55,14 +55,6 @@ function App() {
     secondaryColor: "coral",
   });
 
-  function handleRemove(id) {
-    dispatch({ type: "DELETE_TODO", id });
-  }
-
-  function handleComplete(id) {
-    dispatch({ type: "TOGGLE_TODO", id });
-  }
-
   return (
     <div className="App">
       <StateContext.Provider value={{ state, dispatch }}>

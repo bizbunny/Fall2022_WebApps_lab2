@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import "../styles/App.css";
 import { v4 as uuidv4 } from "uuid";
-
-export default function CreateTodo({ user, todo, dispatch }) {
+import { StateContext } from "../context";
+export default function CreateTodo() {
   //setUser to dispatch * * *
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dateCreated] = useState(Date());
   const [checked] = useState(false); //to move
   const [dateCompleted] = useState(Date()); //to move
+  const [error, setError] = useState(false);
+  const { state, dispatch } = useContext(StateContext);
+  const { user } = state;
 
   // function handleChecked() {
   //   setChecked(!checked);
@@ -17,6 +20,7 @@ export default function CreateTodo({ user, todo, dispatch }) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+
         dispatch({
           type: "CREATE_TODO",
           title: title,

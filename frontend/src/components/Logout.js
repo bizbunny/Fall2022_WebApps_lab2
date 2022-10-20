@@ -1,6 +1,10 @@
 import "../styles/App.css";
-export default function Logout({ user, dispatch }) {
+import { useContext } from "react";
+import { StateContext } from "../context";
+export default function Logout() {
   //setUser to dispatch * * *
+  const { state, dispatch } = useContext(StateContext);
+  const { user } = state;
   return (
     <form
       onSubmit={(e) => {

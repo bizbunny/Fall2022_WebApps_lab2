@@ -1,10 +1,18 @@
 import Todo from "./Todo";
-export default function Todolist({
-  todo = [],
-  onRemove,
-  onComplete,
-  onDateComplete,
-}) {
+import { useContext } from "react";
+import { StateContext } from "../context";
+export default function Todolist() {
+  const { state, dispatch } = useContext(StateContext);
+  const { todo } = state;
+
+  function handleRemove(id) {
+    dispatch({ type: "DELETE_TODO", id });
+  }
+
+  function handleComplete(id) {
+    dispatch({ type: "TOGGLE_TODO", id });
+  }
+
   return (
     <div>
       {todo.map((t, i) => (
@@ -12,8 +20,8 @@ export default function Todolist({
           {...t}
           key={t.id}
           t={t}
-          onRemove={onRemove}
-          onComplete={onComplete}
+          onRemove={handleRemove}
+          onComplete={handleComplete}
         />
       ))}
     </div>
