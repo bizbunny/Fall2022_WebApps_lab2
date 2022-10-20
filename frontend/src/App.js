@@ -14,26 +14,7 @@ import ChangeTheme from "./Themes/ChangeTheme";
 function App() {
   //setUser to dispatch * * *
   //const [user, setUser] = useState("");
-  const initialTodos = [
-    {
-      title: "first todo",
-      content: "content 1",
-      author: "1",
-      complete: false,
-      dateCompleted: "",
-      dateCreated: "Tues Oct 04 2022",
-      id: uuidv4(),
-    },
-    {
-      title: "second todo",
-      content: "content 2",
-      author: "2",
-      complete: false,
-      dateCompleted: "",
-      dateCreated: "Sun Oct 02 2022",
-      id: uuidv4(),
-    },
-  ];
+  const initialTodos = [];
 
   const [state, dispatch] = useReducer(appReducer, {
     user: "",
@@ -49,6 +30,12 @@ function App() {
       document.title = "To Do";
     }
   }, [user]);
+
+  useEffect(() => {
+    fetch("/api/todo")
+      .then((result) => result.json())
+      .then((todo) => dispatch({ type: "FETCH_TODOS", todo }));
+  }, []);
 
   const [theme, setTheme] = useState({
     primaryColor: "deepskyblue",

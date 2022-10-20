@@ -23,7 +23,7 @@ export default function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      <i>Completed: {t.complete.toString()}</i>
+      <i>Completed: {t.complete}</i>
       <br />
       <i>
         Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"}

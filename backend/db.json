@@ -1,0 +1,9 @@
+{
+  "todo": [
+    { "id": 1, "title": "portal", "content": "Some content", "author": "anh" }
+  ],
+  "users": [],
+  "themes": [
+    { "id": 1, "primaryColor": "deepskyblue", "secondaryColor": "coral" }
+  ]
+}
