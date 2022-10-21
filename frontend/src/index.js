@@ -12,10 +12,11 @@ const axiosInstance = axios.create({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <RequestProvider value={axiosInstance}>
-    <App />
-  </RequestProvider>,
-  document.getElementById("root")
+  <React.StrictMode>
+    <RequestProvider value={axiosInstance}>
+      <App />
+    </RequestProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
