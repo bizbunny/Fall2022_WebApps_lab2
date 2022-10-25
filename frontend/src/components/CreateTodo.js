@@ -2,6 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import "../styles/App.css";
 import { v4 as uuidv4 } from "uuid";
 import { StateContext } from "../context";
+
+import { useResource } from "react-request-hook";
+
 export default function CreateTodo() {
   //setUser to dispatch * * *
   const [title, setTitle] = useState("");
@@ -13,15 +16,35 @@ export default function CreateTodo() {
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
 
+  const [todo, createTodo] = useResource(
+    ({ title, content, dateCreated, author }) => ({
+      url: "/todo",
+      method: "post",
+      data: { title, content, dateCreated, author },
+    })
+  );
+
   // function handleChecked() {
   //   setChecked(!checked);
   // }
+
+  function handleCreate() {
+    createTodo({ title, content, dateCreated, author: user });
+    dispatch({
+      type: "CREATE_TODO",
+      title,
+      content,
+      dateCreated,
+      author: user,
+    });
+  }
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
 
-        dispatch({
+        /* dispatch({
           type: "CREATE_TODO",
           title: title,
           content: content,
@@ -30,10 +53,11 @@ export default function CreateTodo() {
           dateCreated: dateCreated.toString(),
           dateCompleted: checked ? dateCompleted.toString() : "",
           id: uuidv4(),
-        });
+        }); */
+        handleCreate();
       }}
     >
-      <div class="align-content">
+      <div className="align-content">
         <br />
         <div>
           Author: <b>{user}</b>
@@ -56,7 +80,7 @@ export default function CreateTodo() {
           {/*<label htmlFor="complete">Completed: </label>
         <input type="checkbox" checked={checked} onChange={handleChecked} />*/}
           {/*to move*/}
-          <input type="submit" value="CREATE" class="button-look" />
+          <input type="submit" value="CREATE" className="button-look" />
         </div>
       </div>
     </form>

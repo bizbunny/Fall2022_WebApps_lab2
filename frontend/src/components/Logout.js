@@ -12,7 +12,7 @@ export default function Logout() {
         dispatch({ type: "LOGOUT" });
       }}
     >
-      <div class="align-content">
+      <div className="align-content">
         Logged in as: <b>{user} </b>
         <input type="submit" className="button-look" value="Logout" />
       </div>
