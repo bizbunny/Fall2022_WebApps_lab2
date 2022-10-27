@@ -40,6 +40,20 @@
       "dateCreated": "Mon Oct 24 2022 14:46:10 GMT-0500 (Central Daylight Time)",
       "author": "test@test.net",
       "id": 6
+    },
+    {
+      "title": "note3",
+      "content": "content3",
+      "dateCreated": "Tue Oct 25 2022 11:00:42 GMT-0500 (Central Daylight Time)",
+      "author": "test2@test.net",
+      "id": 7
+    },
+    {
+      "title": "note4",
+      "content": "content4",
+      "dateCreated": "Thu Oct 27 2022 15:17:13 GMT-0500 (Central Daylight Time)",
+      "author": "test@test.net",
+      "id": 8
     }
   ],
   "users": [
@@ -59,6 +73,16 @@
       "id": 1,
       "primaryColor": "deepskyblue",
       "secondaryColor": "coral"
+    },
+    {
+      "id": 2,
+      "primaryColor": "red",
+      "secondaryColor": "blue"
+    },
+    {
+      "id": 3,
+      "primaryColor": "green",
+      "secondaryColor": "yellow"
     }
   ]
 }

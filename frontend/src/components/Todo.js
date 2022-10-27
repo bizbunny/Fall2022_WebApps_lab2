@@ -1,5 +1,9 @@
 import React, { useState, useContext } from "react";
 import { ThemeContext } from "../context";
+import { useResource } from "react-request-hook";
+
+import { StateContext } from "../context";
+
 function Todo({
   title,
   content,
@@ -12,6 +16,30 @@ function Todo({
 }) {
   const [dateCompleted] = useState(Date());
   const { secondaryColor } = useContext(ThemeContext);
+
+  // for deleting notes
+  const { state, dispatch } = useContext(StateContext);
+  const { user } = state;
+  const [todo, deleteTodo] = useResource(
+    ({ title, content, dateCreated, author }) => ({
+      url: "/todo",
+      method: "delete",
+      data: { title, content, dateCreated, author },
+    })
+  );
+
+  function handleDelete(id) {
+    deleteTodo({ title, content, dateCreated, author: user });
+    dispatch({
+      type: "DELETE_TODO",
+      title: todo?.data?.title,
+      content: todo?.data?.content,
+      dateCreated: todo?.data?.dateCreated,
+      author: todo?.data?.author,
+      id: todo?.data?.id,
+    });
+  }
+
   console.log("Post rendered");
   return (
     <div>

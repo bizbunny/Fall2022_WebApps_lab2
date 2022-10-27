@@ -6,16 +6,20 @@ import { StateContext } from "../context";
 import { useResource } from "react-request-hook";
 
 export default function CreateTodo() {
+  //debug
+  console.log("CreateTodo component executes");
+
   //setUser to dispatch * * *
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dateCreated] = useState(Date());
-  const [checked] = useState(false); //to move
-  const [dateCompleted] = useState(Date()); //to move
+  //const [checked] = useState(false); //to move
+  //const [dateCompleted] = useState(Date()); //to move
   const [error, setError] = useState(false);
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
 
+  //for creating notes
   const [todo, createTodo] = useResource(
     ({ title, content, dateCreated, author }) => ({
       url: "/todo",
@@ -24,21 +28,32 @@ export default function CreateTodo() {
     })
   );
 
-  // function handleChecked() {
-  //   setChecked(!checked);
-  // }
-
   function handleCreate() {
     createTodo({ title, content, dateCreated, author: user });
-    dispatch({
-      type: "CREATE_TODO",
-      title,
-      content,
-      dateCreated,
-      author: user,
-    });
+    // dispatch({
+    //   type: "CREATE_TODO",
+    //   title: todo.data.title,
+    //   content: todo.data.content,
+    //   dateCreated: todo.data.dateCreated,
+    //   author: todo.data.author,
+    // });
   }
 
+  useEffect(() => {
+    if (todo?.data?.error) {
+      setError(true);
+    }
+    dispatch({
+      type: "CREATE_TODO",
+      title: todo?.data?.title,
+      content: todo?.data?.content,
+      dateCreated: todo?.data?.dateCreated,
+      author: todo?.data?.author,
+      id: todo?.data?.id,
+    });
+  }, [todo]);
+  //debug
+  console.log("inside Createtodo");
   return (
     <form
       onSubmit={(e) => {
