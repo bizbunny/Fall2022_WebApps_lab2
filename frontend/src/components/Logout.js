@@ -1,6 +1,10 @@
 import "../styles/App.css";
-export default function Logout({ user, dispatch }) {
+import { useContext } from "react";
+import { StateContext } from "../context";
+export default function Logout() {
   //setUser to dispatch * * *
+  const { state, dispatch } = useContext(StateContext);
+  const { user } = state;
   return (
     <form
       onSubmit={(e) => {
@@ -8,7 +12,7 @@ export default function Logout({ user, dispatch }) {
         dispatch({ type: "LOGOUT" });
       }}
     >
-      <div class="align-content">
+      <div className="align-content">
         Logged in as: <b>{user} </b>
         <input type="submit" className="button-look" value="Logout" />
       </div>
