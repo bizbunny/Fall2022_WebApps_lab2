@@ -28,29 +28,20 @@ export default function CreateTodo() {
     })
   );
 
-  function handleCreate() {
-    createTodo({ title, content, dateCreated, author: user });
-    // dispatch({
-    //   type: "CREATE_TODO",
-    //   title: todo.data.title,
-    //   content: todo.data.content,
-    //   dateCreated: todo.data.dateCreated,
-    //   author: todo.data.author,
-    // });
-  }
-
   useEffect(() => {
-    if (todo?.data?.error) {
+    if (todo?.error) {
       setError(true);
     }
-    dispatch({
-      type: "CREATE_TODO",
-      title: todo?.data?.title,
-      content: todo?.data?.content,
-      dateCreated: todo?.data?.dateCreated,
-      author: todo?.data?.author,
-      id: todo?.data?.id,
-    });
+    if (todo?.isLoading === false && todo?.data) {
+      dispatch({
+        type: "CREATE_TODO",
+        title: todo.data.title,
+        content: todo.data.content,
+        dateCreated: todo.data.dateCreated,
+        author: todo.data.author,
+        id: todo.data.id,
+      });
+    }
   }, [todo]);
   //debug
   console.log("inside Createtodo");
@@ -69,7 +60,7 @@ export default function CreateTodo() {
           dateCompleted: checked ? dateCompleted.toString() : "",
           id: uuidv4(),
         }); */
-        handleCreate();
+        createTodo({ title, content, dateCreated, author: user });
       }}
     >
       <div className="align-content">

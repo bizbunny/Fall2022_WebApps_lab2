@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../context";
 import { useResource } from "react-request-hook";
 
@@ -14,6 +14,8 @@ function Todo({
   onComplete,
   t,
 }) {
+  const [error, setError] = useState(false);
+
   const [dateCompleted] = useState(Date());
   const { secondaryColor } = useContext(ThemeContext);
 
@@ -21,23 +23,31 @@ function Todo({
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
   const [todo, deleteTodo] = useResource(
-    ({ title, content, dateCreated, author }) => ({
-      url: "/todo",
-      method: "delete",
+    ({ title, content, dateCreated, author, id }) => ({
+      url: `/todo/:${id}`,
+      method: `delete`,
       data: { title, content, dateCreated, author },
     })
   );
 
+  useEffect(() => {
+    if (todo?.error) {
+      setError(true);
+    }
+    if (todo?.isLoading === false && todo?.data) {
+      dispatch({
+        type: "DELETE_TODO",
+        title: todo.data.title,
+        content: todo.data.content,
+        dateCreated: todo.data.dateCreated,
+        author: todo.data.author,
+        id: todo.data.id,
+      });
+    }
+  }, [todo]);
+
   function handleDelete(id) {
     deleteTodo({ title, content, dateCreated, author: user });
-    dispatch({
-      type: "DELETE_TODO",
-      title: todo?.data?.title,
-      content: todo?.data?.content,
-      dateCreated: todo?.data?.dateCreated,
-      author: todo?.data?.author,
-      id: todo?.data?.id,
-    });
   }
 
   console.log("Post rendered");
