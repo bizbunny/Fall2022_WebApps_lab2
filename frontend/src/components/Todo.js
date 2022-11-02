@@ -22,11 +22,18 @@ function Todo({
   // for deleting notes
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
+  // const [getTodo] = useResource(
+  //   ({ title, content, dateCreated, author, id }) => ({
+  //     url: `/todo/:${id}`,
+  //     method: `get`,
+  //     data: { title, content, dateCreated, author, id },
+  //   })
+  // );
   const [todo, deleteTodo] = useResource(
     ({ title, content, dateCreated, author, id }) => ({
-      url: `/todo/:${id}`,
+      url: `/todo/${id}`,
       method: `delete`,
-      data: { title, content, dateCreated, author },
+      data: { title, content, dateCreated, author, id },
     })
   );
 
@@ -46,8 +53,10 @@ function Todo({
     }
   }, [todo]);
 
-  function handleDelete(id) {
-    deleteTodo({ title, content, dateCreated, author: user });
+  function handleDelete(title, content, dateCreated, author, id) {
+    //getTodo({ title, content, dateCreated, author, id });
+    deleteTodo({ title, content, dateCreated, author, id });
+    //todo.deleteTodo({ title, content, dateCreated, author, id });
   }
 
   console.log("Post rendered");
@@ -72,7 +81,9 @@ function Todo({
       <button
         type="button"
         className="button-look"
-        onClick={() => onRemove(t.id)}
+        onClick={() =>
+          handleDelete(t.title, t.content, t.dateCreated, t.author, t.id)
+        }
       >
         DELETE
       </button>

@@ -42,25 +42,11 @@
       "id": 6
     },
     {
-      "title": "note3",
-      "content": "content3",
-      "dateCreated": "Tue Oct 25 2022 11:00:42 GMT-0500 (Central Daylight Time)",
-      "author": "test2@test.net",
-      "id": 7
-    },
-    {
       "title": "note4",
       "content": "content4",
       "dateCreated": "Thu Oct 27 2022 15:17:13 GMT-0500 (Central Daylight Time)",
       "author": "test@test.net",
       "id": 8
-    },
-    {
-      "title": "note5",
-      "content": "content5",
-      "dateCreated": "Mon Oct 31 2022 14:18:08 GMT-0500 (Central Daylight Time)",
-      "author": "test@test.net",
-      "id": 9
     }
   ],
   "users": [
