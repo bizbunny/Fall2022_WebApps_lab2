@@ -30,7 +30,12 @@ function Todo({
       data: { title, content, dateCreated, author, id },
     })
   );
-
+  // for updating notes complete field
+  const [todoComplete, updateTodo] = useResource(({ id, complete }) => ({
+    url: `/todo/${id}`,
+    method: `patch`,
+    data: { id, complete },
+  }));
   useEffect(() => {
     if (todo?.error) {
       setError(true);
@@ -45,31 +50,18 @@ function Todo({
         id: todo.data.id,
       });
     }
-  }, [todo]);
+    if (todoComplete?.isLoading === false && todoComplete?.data) {
+      dispatch({
+        type: "TOGGLE_TODO",
+        id: todoComplete.data.id,
+        complete: todoComplete.data.complete,
+      });
+    }
+  }, [todo, todoComplete]);
 
   function handleDelete(title, content, dateCreated, author, id) {
     deleteTodo({ title, content, dateCreated, author, id });
   }
-  // for updating notes complete field
-  const [updateTodo] = useResource(({ id, complete }) => ({
-    url: `/todo/${id}`,
-    method: `put`,
-    data: { id, complete },
-  }));
-
-  useEffect(() => {
-    if (todo?.error) {
-      setError(true);
-    }
-    if (todo?.isLoading === false && todo?.data) {
-      dispatch({
-        type: "TOGGLE_TODO",
-        id: todo.data.id,
-        complete: todo.data.complete,
-      });
-    }
-  }, [todo]);
-
   function handleToggle(id, complete) {
     updateTodo({ id, complete });
   }
@@ -92,7 +84,8 @@ function Todo({
         Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"}
       </i>
       <br />
-      Completed: <input type="checkbox" onChange={() => onComplete(t.id)} />
+      Completed:{" "}
+      <input type="checkbox" onChange={() => handleToggle(t.id, t.complete)} />
       <button
         type="button"
         className="button-look"
