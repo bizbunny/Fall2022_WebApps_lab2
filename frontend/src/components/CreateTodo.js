@@ -13,7 +13,7 @@ export default function CreateTodo() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dateCreated] = useState(Date());
-  //const [checked] = useState(false); //to move
+  const [complete, setComplete] = useState(false); //to move
   //const [dateCompleted] = useState(Date()); //to move
   const [error, setError] = useState(false);
   const { state, dispatch } = useContext(StateContext);
@@ -21,10 +21,10 @@ export default function CreateTodo() {
 
   //for creating notes
   const [todo, createTodo] = useResource(
-    ({ title, content, dateCreated, author }) => ({
+    ({ title, content, dateCreated, complete, author }) => ({
       url: "/todo",
       method: "post",
-      data: { title, content, dateCreated, author },
+      data: { title, content, dateCreated, complete, author },
     })
   );
 
@@ -38,6 +38,7 @@ export default function CreateTodo() {
         title: todo.data.title,
         content: todo.data.content,
         dateCreated: todo.data.dateCreated,
+        complete: todo.data.complete,
         author: todo.data.author,
         id: todo.data.id,
       });
@@ -60,7 +61,7 @@ export default function CreateTodo() {
           dateCompleted: checked ? dateCompleted.toString() : "",
           id: uuidv4(),
         }); */
-        createTodo({ title, content, dateCreated, author: user });
+        createTodo({ title, content, dateCreated, complete, author: user });
       }}
     >
       <div className="align-content">

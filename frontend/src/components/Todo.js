@@ -22,13 +22,7 @@ function Todo({
   // for deleting notes
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
-  // const [getTodo] = useResource(
-  //   ({ title, content, dateCreated, author, id }) => ({
-  //     url: `/todo/:${id}`,
-  //     method: `get`,
-  //     data: { title, content, dateCreated, author, id },
-  //   })
-  // );
+
   const [todo, deleteTodo] = useResource(
     ({ title, content, dateCreated, author, id }) => ({
       url: `/todo/${id}`,
@@ -54,12 +48,33 @@ function Todo({
   }, [todo]);
 
   function handleDelete(title, content, dateCreated, author, id) {
-    //getTodo({ title, content, dateCreated, author, id });
     deleteTodo({ title, content, dateCreated, author, id });
-    //todo.deleteTodo({ title, content, dateCreated, author, id });
+  }
+  // for updating notes complete field
+  const [updateTodo] = useResource(({ id, complete }) => ({
+    url: `/todo/${id}`,
+    method: `put`,
+    data: { id, complete },
+  }));
+
+  useEffect(() => {
+    if (todo?.error) {
+      setError(true);
+    }
+    if (todo?.isLoading === false && todo?.data) {
+      dispatch({
+        type: "TOGGLE_TODO",
+        id: todo.data.id,
+        complete: todo.data.complete,
+      });
+    }
+  }, [todo]);
+
+  function handleToggle(id, complete) {
+    updateTodo({ id, complete });
   }
 
-  console.log("Post rendered");
+  console.log("Post rendered"); //debug
   return (
     <div>
       <h3 style={{ color: secondaryColor }}>{title}</h3>
@@ -71,7 +86,7 @@ function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      <i>Completed: {t.complete}</i>
+      {/* <i>Completed: {t.complete}</i> */}
       <br />
       <i>
         Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"}

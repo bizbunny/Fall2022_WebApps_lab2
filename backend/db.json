@@ -1,51 +1,27 @@
 {
   "todo": [
     {
-      "id": 1,
-      "title": "portal",
-      "content": "Some content",
-      "author": "anh"
-    },
-    {
-      "title": "note",
-      "content": "content",
-      "dateCreated": "Mon Oct 24 2022 09:27:03 GMT-0500 (Central Daylight Time)",
-      "author": "popopo",
-      "id": 2
-    },
-    {
-      "title": "test",
-      "content": "test",
-      "dateCreated": "Mon Oct 24 2022 09:34:06 GMT-0500 (Central Daylight Time)",
-      "author": "abi",
-      "id": 3
-    },
-    {
-      "title": "cheese",
-      "content": "cheese",
-      "dateCreated": "Mon Oct 24 2022 14:24:49 GMT-0500 (Central Daylight Time)",
-      "author": "test@test.net",
-      "id": 4
-    },
-    {
-      "title": "cheese2",
-      "content": "cheese2",
-      "dateCreated": "Mon Oct 24 2022 14:26:35 GMT-0500 (Central Daylight Time)",
-      "author": "test@test.net",
-      "id": 5
-    },
-    {
-      "title": "note2",
-      "content": "note2",
-      "dateCreated": "Mon Oct 24 2022 14:46:10 GMT-0500 (Central Daylight Time)",
-      "author": "test@test.net",
+      "title": "note3",
+      "content": "note3 content",
+      "dateCreated": "Wed Nov 02 2022 11:19:33 GMT-0500 (Central Daylight Time)",
+      "complete": false,
+      "author": "test2@test.net",
       "id": 6
     },
     {
       "title": "note4",
-      "content": "content4",
-      "dateCreated": "Thu Oct 27 2022 15:17:13 GMT-0500 (Central Daylight Time)",
-      "author": "test@test.net",
+      "content": "content 4",
+      "dateCreated": "Wed Nov 02 2022 11:24:18 GMT-0500 (Central Daylight Time)",
+      "complete": false,
+      "author": "test3@test.net",
+      "id": 7
+    },
+    {
+      "title": "note2",
+      "content": "content 2",
+      "dateCreated": "Wed Nov 02 2022 11:25:14 GMT-0500 (Central Daylight Time)",
+      "complete": false,
+      "author": "test2@test.net",
       "id": 8
     }
   ],
@@ -59,6 +35,11 @@
       "email": "test2@test.net",
       "password": "$2a$10$N2KaBqXepnMMyMqwG5mgUeQsz6BcmENvqViYKxzmvM0ZhnKsipt0S",
       "id": 2
+    },
+    {
+      "email": "test3@test.net",
+      "password": "$2a$10$FMrTU3lD5CalFi7fsLaUGOJ6N0oxevmeLS0xXmxOZuuqhg6iWkQA.",
+      "id": 3
     }
   ],
   "themes": [
