@@ -85,7 +85,7 @@ function Todo({
       </i>
       <br />
       Completed:{" "}
-      <input type="checkbox" onChange={() => handleToggle(t.id, t.complete)} />
+      <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
       <button
         type="button"
         className="button-look"
