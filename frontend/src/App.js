@@ -61,15 +61,17 @@ function App() {
     <div className="App">
       <StateContext.Provider value={{ state, dispatch }}>
         <ThemeContext.Provider value={theme}>
-          <Header title="My To Do" />
-          <ChangeTheme theme={theme} setTheme={setTheme} />
-          <React.Suspense fallback={"Loading..."}>
-            <UserBar />
-          </React.Suspense>
-          <div className="align-content">
-            <Todolist />
-          </div>
-          {state.user && <CreateTodo />}
+          <BrowserRouter>
+            <Header title="My To Do" />
+            <ChangeTheme theme={theme} setTheme={setTheme} />
+            <React.Suspense fallback={"Loading..."}>
+              <UserBar />
+            </React.Suspense>
+            <div className="align-content">
+              <Todolist />
+            </div>
+            {state.user && <CreateTodo />}
+          </BrowserRouter>
         </ThemeContext.Provider>
       </StateContext.Provider>
     </div>
