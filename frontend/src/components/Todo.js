@@ -66,7 +66,7 @@ function Todo({
     updateTodo({ id, complete });
   }
 
-  console.log("Post rendered"); //debug
+  console.log("Todo rendered"); //debug
   return (
     <div>
       <h3 style={{ color: secondaryColor }}>{title}</h3>

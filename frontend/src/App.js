@@ -14,6 +14,11 @@ import ChangeTheme from "./Themes/ChangeTheme";
 
 import { useResource } from "react-request-hook";
 
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+//import Layout from "./";
+//import HomePage from "./";
+//import TodoPage from "./";
+
 function App() {
   //setUser to dispatch * * *
   //const [user, setUser] = useState("");
