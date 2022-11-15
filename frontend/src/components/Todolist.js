@@ -24,6 +24,10 @@ export default function Todolist() {
           onComplete={handleComplete}
         />
       ))}
+      <div>
+        {todo.length === 0 && <h2>No todos found.</h2>}
+        {todo.length > 0 && todo.map((t, i) => <Todo {...t} key={t._id || t.id} />)}
+      </div>
     </div>
   );
 }

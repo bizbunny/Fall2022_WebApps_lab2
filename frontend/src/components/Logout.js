@@ -13,7 +13,7 @@ export default function Logout() {
       }}
     >
       <div className="align-content">
-        Logged in as: <b>{user} </b>
+        Logged in as: <b>{user.username} </b>
         <input type="submit" className="button-look" value="Logout" />
       </div>
     </form>

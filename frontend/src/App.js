@@ -15,9 +15,9 @@ import ChangeTheme from "./Themes/ChangeTheme";
 import { useResource } from "react-request-hook";
 
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-//import Layout from "./";
-//import HomePage from "./";
-//import TodoPage from "./";
+import Layout from "./pages/Layout";
+import HomePage from "./pages/Homepage";
+import TodoPage from "./pages/TodoPage";
 
 function App() {
   //setUser to dispatch * * *
@@ -62,7 +62,7 @@ function App() {
       <StateContext.Provider value={{ state, dispatch }}>
         <ThemeContext.Provider value={theme}>
           <BrowserRouter>
-            <Header title="My To Do" />
+            {/* <Header title="My To Do" />
             <ChangeTheme theme={theme} setTheme={setTheme} />
             <React.Suspense fallback={"Loading..."}>
               <UserBar />
@@ -70,7 +70,16 @@ function App() {
             <div className="align-content">
               <Todolist />
             </div>
-            {state.user && <CreateTodo />}
+            {state.user && <CreateTodo />} */}
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />} />
+              </Route>
+              <Route path="/todo" element={<Layout />}>
+                <Route path="/todo/create" element={<CreateTodo />} />
+                <Route path="/todo/:id" element={<TodoPage />} />
+              </Route>
+            </Routes>
           </BrowserRouter>
         </ThemeContext.Provider>
       </StateContext.Provider>
