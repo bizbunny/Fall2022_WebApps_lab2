@@ -9,9 +9,9 @@ export default function Registration() {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const { dispatch } = useContext(StateContext);
-
+  
   const [status, setStatus] = useState("");
-
+  
   function handlePassword(evt) {
     setPassword(evt.target.value);
   }
@@ -40,7 +40,8 @@ export default function Registration() {
         setStatus("Registration successful. You may now login.");
       }
     }
-  }, [user]);
+  }, [user])
+
 
   return (
     <form
@@ -84,7 +85,6 @@ export default function Registration() {
           password !== passwordRepeat
         }
       />
-      <p>{status}</p>
     </form>
   );
 }

@@ -1,7 +1,7 @@
-import React, { useEffect, useContext } from 'react';//usecontext
+import React, { useEffect, useContext } from 'react';
 import { useResource } from 'react-request-hook';
 import { useParams, useNavigate } from "react-router-dom";
-import {StateContext} from "../context";//look at statecontenct
+import {StateContext} from "../context";
 import Todo from "../components/Todo";
 
 export default function TodoPage () {

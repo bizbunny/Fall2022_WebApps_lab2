@@ -1,4 +1,4 @@
-var express = require("express");
+var express = require('express');
 //var path = require('path');
 //var cookieParser = require('cookie-parser');
 //var logger = require('morgan');
@@ -23,17 +23,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); */
 
-require("./setupMongo")();
+require('./setupMongo')();
 
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-app.use(express.json());
+app.use(express.json())
 app.use("/auth", require("./routes/auth"));
 app.use("/post", require("./routes/todo"));
 
-/* app.use(function (err, req, res, next) {
-  console.error(err.stack);
-}); */
+app.use(function (err, req, res, next) {
+console.error(err.stack);
+});
 
 module.exports = app;
