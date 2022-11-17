@@ -14,7 +14,7 @@ import ChangeTheme from "./Themes/ChangeTheme";
 
 import { useResource } from "react-request-hook";
 
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import HomePage from "./pages/Homepage";
 import TodoPage from "./pages/TodoPage";
@@ -25,7 +25,7 @@ function App() {
   const initialTodos = [];
 
   const [state, dispatch] = useReducer(appReducer, {
-    user: {},
+    user: "",
     todo: initialTodos,
   });
 
