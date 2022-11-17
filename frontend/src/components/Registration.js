@@ -85,6 +85,7 @@ export default function Registration() {
           password !== passwordRepeat
         }
       />
+      <p>{status}</p>
     </form>
   );
 }

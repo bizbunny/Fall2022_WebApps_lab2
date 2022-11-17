@@ -25,7 +25,7 @@ function App() {
   const initialTodos = [];
 
   const [state, dispatch] = useReducer(appReducer, {
-    user: {},
+    user: "",
     todo: initialTodos,
   });
 

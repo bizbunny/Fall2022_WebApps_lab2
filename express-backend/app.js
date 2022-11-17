@@ -25,15 +25,15 @@ app.use(express.static(path.join(__dirname, 'public'))); */
 
 require('./setupMongo')();
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/', indexRouter);
+//app.use('/users', usersRouter);
 
 app.use(express.json())
 app.use("/auth", require("./routes/auth"));
 app.use("/post", require("./routes/todo"));
 
-app.use(function (err, req, res, next) {
+/* app.use(function (err, req, res, next) {
 console.error(err.stack);
 });
-
+ */
 module.exports = app;

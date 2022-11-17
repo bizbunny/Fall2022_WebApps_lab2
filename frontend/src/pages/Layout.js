@@ -1,6 +1,6 @@
 import React, { useContext} from "react";
 import {Outlet, Link} from "react-router-dom";
-import UserBar from "../Reducers";
+import UserBar from "../components/UserBar";
 import Header from "../Header";
 import {StateContext} from "../context";
 

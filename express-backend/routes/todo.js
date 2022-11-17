@@ -23,7 +23,7 @@ router.use(function (req, res, next) {
 });
 
 //for authoring new Todo
-router.todo("/", async function (req, res) {
+router.post("/", async function (req, res) {
     const todo = new Todo({
         title: req.body.title,
         content: req.body.content,
