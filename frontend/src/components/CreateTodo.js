@@ -24,7 +24,7 @@ export default function CreateTodo() {
     ({ title, content, dateCreated, complete, author }) => ({
       url: "/todo",
       method: "post",
-      header: {"Authorization": `${state.user.access_token}`},
+      headers: { Authorization: `${state.user.access_token}` },
       data: { title, content, dateCreated, complete, author },
     })
   );

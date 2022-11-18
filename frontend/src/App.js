@@ -7,14 +7,14 @@ import appReducer from "./Reducers";
 
 import { useResource } from "react-request-hook";
 //import Header from "./Header";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import { v4 as uuidv4 } from "uuid";
 
 import { ThemeContext, StateContext } from "./context";
 import ChangeTheme from "./Themes/ChangeTheme";
 
 import CreateTodo from "./components/CreateTodo";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+
 import Layout from "./pages/Layout";
 import HomePage from "./pages/Homepage";
 import TodoPage from "./pages/TodoPage";
@@ -47,12 +47,15 @@ function App() {
   const [todo, getTodo] = useResource(() => ({
     url: "/todo",
     method: "get",
+    headers: { Authorization: `${state?.user?.access_token}` },
   }));
 
-  useEffect(getTodo, []);
+  useEffect(() => {
+    getTodo();
+  }, [state?.user?.access_token]);
 
   useEffect(() => {
-    if (todo && todo.data) {
+    if (todo && todo.isLoading === false && todo.data) {
       dispatch({ type: "FETCH_TODOS", todo: todo.data.reverse() });
     }
   }, [todo]);
@@ -62,15 +65,6 @@ function App() {
       <StateContext.Provider value={{ state, dispatch }}>
         <ThemeContext.Provider value={theme}>
           <BrowserRouter>
-            {/* <Header title="My To Do" />
-            <ChangeTheme theme={theme} setTheme={setTheme} />
-            <React.Suspense fallback={"Loading..."}>
-              <UserBar />
-            </React.Suspense>
-            <div className="align-content">
-              <Todolist />
-            </div>
-            {state.user && <CreateTodo />} */}
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
