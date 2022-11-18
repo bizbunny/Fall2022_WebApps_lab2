@@ -1,12 +1,11 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-
+const router = express.Router();
 const saltRounds = 10;
 
-const privateKey = ``;
+const privateKey = ``;//DELETE LATER
 
 router.use(function(req, res, next){//for middlware
     bcrypt.genSalt(saltRounds, function(err, salt){
@@ -32,7 +31,7 @@ router.post("/login", async function (req, res, next) {//for persisting a new us
                         const token = jwt.sign({ id: user._id }, privateKey, {
                             algorithm: "RS256",
                         });
-                        return res.status(200).json({ access_token: token });
+                        return res.status(200).json({ username: user.username, access_token: token });
                     } 
                     else {
                         return res.status(401).json({ error: "Invalid credentials." });
@@ -57,17 +56,22 @@ router.post("/register", async function (req, res, next) {
                 username: req.body.username,
                 password: req.hashedPassword,
             });
-            return await user
+            return user
                 .save()
                 .then((savedUser) => {
-                        return res.status(201).json({
-                            id: savedUser._id,
-                            username: savedUser.username,
-                        });
+                    const token = jwt.sign({id: user._id},privateKey,{
+                        algorithm: "RS256",
+                    });
+                    return res.status(201).json({
+                        id: savedUser._id,
+                        username: savedUser.username,
+                        access_token: token,
+                    });
                 })
                 .catch((error) => {
-                return res.status(500).json({ error: error.message });
-            });
+                    return res.status(500).json({ error: "Something went wrong" });
+                }
+            );
         }
         res.status(400).json({ error: "Passwords not matching" });
     } 

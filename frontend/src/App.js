@@ -1,19 +1,19 @@
 import "./styles/App.css";
-import UserBar from "./components/UserBar";
-import Todolist from "./components/Todolist";
+//import UserBar from "./components/UserBar";
+//import Todolist from "./components/Todolist";
 import React, { useState, useEffect, useReducer } from "react";
-import CreateTodo from "./components/CreateTodo";
+
 import appReducer from "./Reducers";
 
-import Header from "./Header";
+import { useResource } from "react-request-hook";
+//import Header from "./Header";
 
 //import { v4 as uuidv4 } from "uuid";
 
 import { ThemeContext, StateContext } from "./context";
 import ChangeTheme from "./Themes/ChangeTheme";
 
-import { useResource } from "react-request-hook";
-
+import CreateTodo from "./components/CreateTodo";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "./pages/Layout";
 import HomePage from "./pages/Homepage";

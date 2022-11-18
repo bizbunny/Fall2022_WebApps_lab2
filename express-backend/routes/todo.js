@@ -1,10 +1,11 @@
 const express = require("express");
-const router = express.Router();
 const jwt = require("jsonwebtoken");
-
 const Todo = require("../models/Todo");
+const User = require("../models/User");
 
-const privateKey = ``;
+const privateKey = ``;//DELETE LATER
+
+const router = express.Router();
 
 //for middlware
 router.use(function (req, res, next) {
@@ -28,16 +29,20 @@ router.post("/", async function (req, res) {
         title: req.body.title,
         content: req.body.content,
         author: req.payload.id,
+        dateCreated: req.body.dateCreated,
+        complete: req.body.complete
     });
         // await todo
         return todo
                 .save()
                 .then((savedTodo) => {
                         return res.status(201).json({
-                                id: savedTodo._id,
-                    title: savedTodo.title,
-                    content: savedTodo.content,
-                    author: savedTodo.author,
+                            id: savedTodo._id,
+                            title: savedTodo.title,
+                            content: savedTodo.content,
+                            author: savedTodo.author,
+                            dateCreated: savedTodo.dateCreated,
+                            complete: savedTodo.complete
                         });
                 })
         .catch((error) => {

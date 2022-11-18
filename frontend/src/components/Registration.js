@@ -1,13 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../context";
-
 import { useResource } from "react-request-hook";
 
 export default function Registration() {
   //setUser to dispatch * * *
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [passwordConfirmation, setpasswordConfirmation] = useState("");
   const { dispatch } = useContext(StateContext);
   
   const [status, setStatus] = useState("");
@@ -15,14 +14,14 @@ export default function Registration() {
   function handlePassword(evt) {
     setPassword(evt.target.value);
   }
-  function handlePasswordRepeat(evt) {
-    setPasswordRepeat(evt.target.value);
+  function handlepasswordConfirmation(evt) {
+    setpasswordConfirmation(evt.target.value);
   }
 
   const [user, register] = useResource((username, password) => ({
-    url: "auth/users",
+    url: "auth/register",
     method: "post",
-    data: { username, password, passwordRepeat: password },
+    data: { username, password, passwordConfirmation: password },
   }));
 
   // useEffect(() => {
@@ -48,7 +47,6 @@ export default function Registration() {
       onSubmit={(e) => {
         e.preventDefault();
         register(username, password);
-        //dispatch({ type: "REGISTER", username });
       }}
     >
       <label htmlFor="register-username">Username: </label>
@@ -72,8 +70,8 @@ export default function Registration() {
         type="password"
         name="register-password-repeat"
         id="register-password-repeat"
-        value={passwordRepeat}
-        onChange={handlePasswordRepeat}
+        value={passwordConfirmation}
+        onChange={handlepasswordConfirmation}
       />
       <input
         type="submit"
@@ -82,7 +80,7 @@ export default function Registration() {
         disabled={
           username.length === 0 ||
           password.length === 0 ||
-          password !== passwordRepeat
+          password !== passwordConfirmation
         }
       />
       <p>{status}</p>
