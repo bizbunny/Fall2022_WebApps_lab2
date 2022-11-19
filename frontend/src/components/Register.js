@@ -2,15 +2,15 @@ import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../context";
 import { useResource } from "react-request-hook";
 
-export default function Registration() {
+export default function Register() {
   //setUser to dispatch * * *
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setpasswordConfirmation] = useState("");
   const { dispatch } = useContext(StateContext);
-  
+
   const [status, setStatus] = useState("");
-  
+
   function handlePassword(evt) {
     setPassword(evt.target.value);
   }
@@ -39,8 +39,7 @@ export default function Registration() {
         setStatus("Registration successful. You may now login.");
       }
     }
-  }, [user])
-
+  }, [user]);
 
   return (
     <form
