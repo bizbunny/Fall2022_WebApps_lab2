@@ -8,6 +8,7 @@ const saltRounds = 10;
 const privateKey = ``; //DELETE LATER
 
 router.use(function (req, res, next) {
+  //executes on every request coming in
   //for middlware: hashing and storing passwords
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(req.body.password, salt, function (err, hash) {

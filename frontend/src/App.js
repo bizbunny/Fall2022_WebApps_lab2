@@ -54,11 +54,11 @@ function App() {
     getTodo();
   }, [state?.user?.access_token]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (todo && todo.isLoading === false && todo.data) {
       dispatch({ type: "FETCH_TODOS", todo: todo.data.reverse() });
     }
-  }, [todo]);
+  }, [todo]); */
 
   return (
     <div className="App">
