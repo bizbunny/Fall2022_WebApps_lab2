@@ -3,7 +3,7 @@ import { ThemeContext } from "../context";
 import { useResource } from "react-request-hook";
 
 import { StateContext } from "../context";
-
+import { Link } from "react-router-dom";
 function Todo({
   title,
   content,
@@ -13,6 +13,7 @@ function Todo({
   onRemove,
   onComplete,
   t,
+  _id,
 }) {
   const [error, setError] = useState(false);
 
@@ -69,7 +70,9 @@ function Todo({
   console.log("Todo rendered"); //debug
   return (
     <div>
-      <h3 style={{ color: secondaryColor }}>{title}</h3>
+      <Link to={`/post/${_id}`}>
+        <h3 style={{ color: secondaryColor }}>{title}</h3>
+      </Link>
       <div>{content}</div>
       <br />
       <i>

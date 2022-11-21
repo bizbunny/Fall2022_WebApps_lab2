@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import "../styles/App.css";
-import { v4 as uuidv4 } from "uuid";
+//import { v4 as uuidv4 } from "uuid";
 import { StateContext } from "../context";
 
 import { useResource } from "react-request-hook";
@@ -30,7 +30,7 @@ export default function CreateTodo() {
   );
 
   useEffect(() => {
-    if (todo?.isLoading === false && todo.data) {
+    if (todo.isLoading === false && todo.data) {
       dispatch({
         type: "CREATE_TODO",
         title: todo.data.title,

@@ -31,7 +31,7 @@ export default function Login() {
         setLoginFailed(false);
         dispatch({
           type: "LOGIN",
-          username: "User",
+          username: user.data.username, //change it user.data.username
           access_token: user.data.access_token,
         });
       }
