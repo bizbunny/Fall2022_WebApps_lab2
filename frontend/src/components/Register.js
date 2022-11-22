@@ -1,34 +1,43 @@
 import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../context";
-
 import { useResource } from "react-request-hook";
 
-export default function Registration() {
+export default function Register() {
   //setUser to dispatch * * *
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [passwordConfirmation, setpasswordConfirmation] = useState("");
   const { dispatch } = useContext(StateContext);
-  //   function handleUsername(evt) {
-  //     setUsername(evt.target.value);
-  //   }
+
+  const [status, setStatus] = useState("");
+
   function handlePassword(evt) {
     setPassword(evt.target.value);
   }
-  function handlePasswordRepeat(evt) {
-    setPasswordRepeat(evt.target.value);
+  function handlepasswordConfirmation(evt) {
+    setpasswordConfirmation(evt.target.value);
   }
 
   const [user, register] = useResource((username, password) => ({
-    url: "/users",
+    url: "auth/register",
     method: "post",
-    data: { email: username, password },
+    data: { username, password, passwordConfirmation: password },
   }));
 
+  // useEffect(() => {
+  //   if (user && user.data && user.data.user.email) {
+  //     //user.error === undefined
+  //     dispatch({ type: "REGISTER", username: user.data.user.email });
+  //   }
+  // }, [user]);
+
   useEffect(() => {
-    if (user && user.data && user.data.user.email) {
-      //user.error === undefined
-      dispatch({ type: "REGISTER", username: user.data.user.email });
+    if (user && user.isLoading === false && (user.data || user.error)) {
+      if (user.error) {
+        setStatus("Registration failed, please try again later.");
+      } else {
+        setStatus("Registration successful. You may now login.");
+      }
     }
   }, [user]);
 
@@ -37,7 +46,6 @@ export default function Registration() {
       onSubmit={(e) => {
         e.preventDefault();
         register(username, password);
-        //dispatch({ type: "REGISTER", username });
       }}
     >
       <label htmlFor="register-username">Username: </label>
@@ -61,8 +69,8 @@ export default function Registration() {
         type="password"
         name="register-password-repeat"
         id="register-password-repeat"
-        value={passwordRepeat}
-        onChange={handlePasswordRepeat}
+        value={passwordConfirmation}
+        onChange={handlepasswordConfirmation}
       />
       <input
         type="submit"
@@ -71,9 +79,10 @@ export default function Registration() {
         disabled={
           username.length === 0 ||
           password.length === 0 ||
-          password !== passwordRepeat
+          password !== passwordConfirmation
         }
       />
+      <p>{status}</p>
     </form>
   );
 }

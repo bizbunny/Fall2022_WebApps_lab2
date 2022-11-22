@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../context";
 import { useResource } from "react-request-hook";
-
 import { StateContext } from "../context";
-
+import { Link } from "react-router-dom";
 function Todo({
   title,
   content,
@@ -13,13 +12,14 @@ function Todo({
   onRemove,
   onComplete,
   t,
+  _id,
 }) {
   const [error, setError] = useState(false);
 
   const [dateCompleted] = useState(Date());
   const { secondaryColor } = useContext(ThemeContext);
 
-  // for deleting notes
+  /*  // for deleting notes
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
 
@@ -61,15 +61,38 @@ function Todo({
 
   function handleDelete(title, content, dateCreated, author, id) {
     deleteTodo({ title, content, dateCreated, author, id });
-  }
-  function handleToggle(id, complete) {
-    updateTodo({ id, complete });
-  }
+  } */
 
-  console.log("Post rendered"); //debug
+  const { state, dispatch } = useContext(StateContext);
+  const [todelete, deleteTodo] = useResource((_id) => ({
+    url: `/todo/delete/${_id}`,
+    method: `delete`,
+    headers: { Authorization: `${state.user.access_token}` },
+  }));
+  const [todoComplete, updateTodo] = useResource(({ complete }) => ({
+    url: `/todo/toggle/${_id}`,
+    method: `patch`,
+    headers: { Authorization: `${state.user.access_token}` },
+    data: { complete, dateCompleted },
+  }));
+  function handleToggle(complete) {
+    // updateTodo({ id, complete });
+    console.log("To fix"); //debug
+    updateTodo(complete);
+    if (todoComplete?.isLoading === false && todoComplete?.data) {
+      dispatch({
+        type: "TOGGLE_TODO",
+        complete: todoComplete.data.complete,
+        dateCompleted: todoComplete.data.dateCompleted,
+      });
+    }
+  }
+  console.log("Todo rendered"); //debug
   return (
     <div>
-      <h3 style={{ color: secondaryColor }}>{title}</h3>
+      <Link to={`/todo/${_id}`}>
+        <h3 style={{ color: secondaryColor }}>{title}</h3>
+      </Link>
       <div>{content}</div>
       <br />
       <i>
@@ -78,14 +101,15 @@ function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      {/* <i>Completed: {t.complete}</i> */}
+      <i>Completed: {complete}</i>
       <br />
       <i>
-        Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"}
+        Date of Task Completed: {complete ? dateCompleted.toString() : "N/A"}
       </i>
       <br />
       Completed:{" "}
-      <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
+      <input type="checkbox" onChange={() => handleToggle(complete)} />
+      {/* <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
       <button
         type="button"
         className="button-look"
@@ -94,7 +118,21 @@ function Todo({
         }
       >
         DELETE
-      </button>
+      </button> */}
+      <br />
+      <input
+        type="submit"
+        value="DELETE"
+        className="button-look"
+        onClick={(e) => {
+          e.preventDefault();
+          deleteTodo(_id);
+          dispatch({
+            type: "DELETE_TODO",
+            id: _id,
+          });
+        }}
+      />
     </div>
   );
 }

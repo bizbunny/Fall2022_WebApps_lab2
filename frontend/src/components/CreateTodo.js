@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import "../styles/App.css";
-import { v4 as uuidv4 } from "uuid";
+//import { v4 as uuidv4 } from "uuid";
 import { StateContext } from "../context";
 
 import { useResource } from "react-request-hook";
@@ -24,15 +24,13 @@ export default function CreateTodo() {
     ({ title, content, dateCreated, complete, author }) => ({
       url: "/todo",
       method: "post",
+      headers: { Authorization: `${state.user.access_token}` },
       data: { title, content, dateCreated, complete, author },
     })
   );
 
   useEffect(() => {
-    if (todo?.error) {
-      setError(true);
-    }
-    if (todo?.isLoading === false && todo?.data) {
+    if (todo.isLoading === false && todo.data) {
       dispatch({
         type: "CREATE_TODO",
         title: todo.data.title,
@@ -50,24 +48,13 @@ export default function CreateTodo() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-
-        /* dispatch({
-          type: "CREATE_TODO",
-          title: title,
-          content: content,
-          author: user,
-          complete: checked,
-          dateCreated: dateCreated.toString(),
-          dateCompleted: checked ? dateCompleted.toString() : "",
-          id: uuidv4(),
-        }); */
         createTodo({ title, content, dateCreated, complete, author: user });
       }}
     >
       <div className="align-content">
         <br />
         <div>
-          Author: <b>{user}</b>
+          Author: <b>{user.username}</b>
         </div>
         <div>
           <label htmlFor="create-title">Title: </label>
