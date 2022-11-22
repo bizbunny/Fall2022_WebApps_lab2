@@ -64,7 +64,7 @@ function Todo({
   } */
   function handleToggle(id, complete) {
     // updateTodo({ id, complete });
-    console.log("Fix later");
+    console.log("To fix");
   }
 
   const { state, dispatch } = useContext(StateContext);
@@ -87,10 +87,11 @@ function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      {/* <i>Completed: {t.complete}</i> */}
+      <i>Completed: {/* {t.complete} */}</i>
       <br />
       <i>
-        {/* Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"} */}
+        Date of Task Completed:{" "}
+        {/* {t.complete ? dateCompleted.toString() : "N/A"} */}
       </i>
       <br />
       Completed:{" "}

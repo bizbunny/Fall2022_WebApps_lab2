@@ -6,7 +6,7 @@ function userReducer(state, action) {
       return {
         username: action.username,
         access_token: action.access_token,
-      }
+      };
     case "LOGOUT":
       return null;
     default:
