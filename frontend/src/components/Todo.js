@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../context";
 import { useResource } from "react-request-hook";
-
 import { StateContext } from "../context";
 import { Link } from "react-router-dom";
 function Todo({
@@ -20,7 +19,7 @@ function Todo({
   const [dateCompleted] = useState(Date());
   const { secondaryColor } = useContext(ThemeContext);
 
-  // for deleting notes
+  /*  // for deleting notes
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
 
@@ -62,11 +61,18 @@ function Todo({
 
   function handleDelete(title, content, dateCreated, author, id) {
     deleteTodo({ title, content, dateCreated, author, id });
-  }
+  } */
   function handleToggle(id, complete) {
-    updateTodo({ id, complete });
+    // updateTodo({ id, complete });
+    console.log("Fix later");
   }
 
+  const { state, dispatch } = useContext(StateContext);
+  const [todelete, deleteTodo] = useResource((_id) => ({
+    url: `/todo/delete/${_id}`,
+    method: `delete`,
+    headers: { Authorization: `${state.user.access_token}` },
+  }));
   console.log("Todo rendered"); //debug
   return (
     <div>
@@ -84,11 +90,12 @@ function Todo({
       {/* <i>Completed: {t.complete}</i> */}
       <br />
       <i>
-        Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"}
+        {/* Date of Task Completed: {t.complete ? dateCompleted.toString() : "N/A"} */}
       </i>
       <br />
       Completed:{" "}
       <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
+      {/* <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
       <button
         type="button"
         className="button-look"
@@ -97,7 +104,21 @@ function Todo({
         }
       >
         DELETE
-      </button>
+      </button> */}
+      <br />
+      <input
+        type="submit"
+        value="DELETE"
+        className="button-look"
+        onClick={(e) => {
+          e.preventDefault();
+          deleteTodo(_id);
+          dispatch({
+            type: "DELETE_TODO",
+            id: _id,
+          });
+        }}
+      />
     </div>
   );
 }
