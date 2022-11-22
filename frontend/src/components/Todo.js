@@ -62,10 +62,6 @@ function Todo({
   function handleDelete(title, content, dateCreated, author, id) {
     deleteTodo({ title, content, dateCreated, author, id });
   } */
-  function handleToggle(id, complete) {
-    // updateTodo({ id, complete });
-    console.log("To fix");
-  }
 
   const { state, dispatch } = useContext(StateContext);
   const [todelete, deleteTodo] = useResource((_id) => ({
@@ -73,10 +69,28 @@ function Todo({
     method: `delete`,
     headers: { Authorization: `${state.user.access_token}` },
   }));
+  const [todoComplete, updateTodo] = useResource(({ complete }) => ({
+    url: `/todo/toggle/${_id}`,
+    method: `patch`,
+    headers: { Authorization: `${state.user.access_token}` },
+    data: { complete, dateCompleted },
+  }));
+  function handleToggle(complete) {
+    // updateTodo({ id, complete });
+    console.log("To fix"); //debug
+    updateTodo(complete);
+    if (todoComplete?.isLoading === false && todoComplete?.data) {
+      dispatch({
+        type: "TOGGLE_TODO",
+        complete: todoComplete.data.complete,
+        dateCompleted: todoComplete.data.dateCompleted,
+      });
+    }
+  }
   console.log("Todo rendered"); //debug
   return (
     <div>
-      <Link to={`/post/${_id}`}>
+      <Link to={`/todo/${_id}`}>
         <h3 style={{ color: secondaryColor }}>{title}</h3>
       </Link>
       <div>{content}</div>
@@ -87,15 +101,14 @@ function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      <i>Completed: {/* {t.complete} */}</i>
+      <i>Completed: {complete}</i>
       <br />
       <i>
-        Date of Task Completed:{" "}
-        {/* {t.complete ? dateCompleted.toString() : "N/A"} */}
+        Date of Task Completed: {complete ? dateCompleted.toString() : "N/A"}
       </i>
       <br />
       Completed:{" "}
-      <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
+      <input type="checkbox" onChange={() => handleToggle(complete)} />
       {/* <input type="checkbox" onClick={() => handleToggle(t.id, t.complete)} />
       <button
         type="button"

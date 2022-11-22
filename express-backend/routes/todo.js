@@ -77,7 +77,7 @@ router.delete("/delete/:id", async function (req, res) {
 });
 
 //toggling complete
-router.delete("/update/:id", async function (req, res) {
+router.patch("/update/:id", async function (req, res) {
   //find what to toggle by ID
   const todo = await Todo.findByIdAndUpdate()
     .where("_id")
