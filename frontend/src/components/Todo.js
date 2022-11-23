@@ -9,9 +9,7 @@ function Todo({
   author,
   dateCreated,
   complete,
-  onRemove,
-  onComplete,
-  t,
+
   _id,
 }) {
   const [error, setError] = useState(false);
@@ -69,21 +67,21 @@ function Todo({
     method: `delete`,
     headers: { Authorization: `${state.user.access_token}` },
   }));
-  const [todoComplete, updateTodo] = useResource(({ complete }) => ({
+  const [todoComplete, updateTodo] = useResource((complete) => ({
     url: `/todo/toggle/${_id}`,
     method: `patch`,
     headers: { Authorization: `${state.user.access_token}` },
-    data: { complete, dateCompleted },
+    data: { complete },
   }));
   function handleToggle(complete) {
     // updateTodo({ id, complete });
     console.log("To fix"); //debug
+    todoComplete.complete = !todoComplete.complete;
     updateTodo(complete);
     if (todoComplete?.isLoading === false && todoComplete?.data) {
       dispatch({
         type: "TOGGLE_TODO",
         complete: todoComplete.data.complete,
-        dateCompleted: todoComplete.data.dateCompleted,
       });
     }
   }
@@ -101,7 +99,7 @@ function Todo({
       <br />
       <i>Date Created: {dateCreated}</i>
       <br />
-      <i>Completed: {complete}</i>
+      <i>Completed: {todoComplete.complete}</i>
       <br />
       <i>
         Date of Task Completed: {complete ? dateCompleted.toString() : "N/A"}
